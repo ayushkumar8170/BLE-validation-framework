@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ble-validation-framework"
+version = "1.0.0"
+description = "Automated BLE GAP/GATT functional validation framework with stress testing, packet-level diagnostics, and HTML reporting."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Your Name" }]
+dependencies = [
+    "bleak>=0.22.0",
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-html>=4.1.0",
+    "pyshark>=0.6",
+    "jinja2>=3.1.0",
+    "python-dateutil>=2.9.0",
+]
+
+[project.optional-dependencies]
+dev = ["black>=24.0.0", "flake8>=7.0.0", "mypy>=1.9.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+markers = [
+    "stress: long-running stress/endurance tests",
+    "hardware: requires a real BLE peripheral (skipped when unset)",
+]
